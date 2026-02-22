@@ -1,28 +1,27 @@
-"use client";
-
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
-import SolutionSection from "@/components/SolutionSection";
-import SimulatorSection from "@/components/SimulatorSection";
+import MarketProblem from "@/components/MarketProblem";
+import Multiplier25x from "@/components/Multiplier25x";
+import Products from "@/components/Products";
+import SteamComparison from "@/components/SteamComparison";
+import TechStack from "@/components/TechStack";
+import ExpansionVision from "@/components/ExpansionVision";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
 
-export default function HomePage() {
-  const [language, setLanguage] = useState<"ko" | "en">("ko");
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-dark text-white">
-      <Navbar language={language} onLanguageChange={setLanguage} />
-      <main className="relative">
-        <HeroSection language={language} />
-        <ProblemSection language={language} />
-        <SolutionSection language={language} />
-        <SimulatorSection language={language} />
-        <WaitlistSection language={language} />
-        <Footer language={language} />
-      </main>
-    </div>
+    <main>
+      <Navbar />
+      <HeroSection />
+      <MarketProblem />
+      <Multiplier25x />
+      <Products />
+      <SteamComparison />
+      <TechStack />
+      <ExpansionVision />
+      <WaitlistSection />
+      <Footer />
+    </main>
   );
 }

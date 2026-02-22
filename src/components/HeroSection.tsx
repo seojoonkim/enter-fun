@@ -1,142 +1,100 @@
 "use client";
 
-import { FormEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
-interface HeroSectionProps {
-  language: "ko" | "en";
+interface Particle {
+  left: number;
+  bottom: number;
+  duration: number;
+  delay: number;
 }
 
-const particles = [
-  { left: "9%", top: "82%", size: 4, delay: "0.1s", duration: "9s", opacity: 0.45 },
-  { left: "18%", top: "74%", size: 6, delay: "1.5s", duration: "8s", opacity: 0.3 },
-  { left: "29%", top: "86%", size: 3, delay: "3.2s", duration: "11s", opacity: 0.33 },
-  { left: "40%", top: "80%", size: 5, delay: "0.9s", duration: "10s", opacity: 0.4 },
-  { left: "52%", top: "90%", size: 4, delay: "2.4s", duration: "7s", opacity: 0.38 },
-  { left: "63%", top: "84%", size: 3, delay: "1.3s", duration: "9.5s", opacity: 0.35 },
-  { left: "71%", top: "88%", size: 6, delay: "4.1s", duration: "8.8s", opacity: 0.42 },
-  { left: "83%", top: "79%", size: 4, delay: "0.7s", duration: "10.3s", opacity: 0.34 },
-  { left: "91%", top: "84%", size: 3, delay: "2.8s", duration: "9s", opacity: 0.31 },
-];
+export default function HeroSection() {
+  const [particles, setParticles] = useState<Particle[]>([]);
 
-export default function HeroSection({ language }: HeroSectionProps) {
-  const t =
-    language === "ko"
-      ? {
-          badge: "🎮 Streamer Monetization, Reimagined",
-          title: "스트리밍하면 보상받는다.",
-          subtitle:
-            "실시간 방송 데이터 분석 × 블록체인 자동 정산. 공정한 게임 스트리밍 생태계를 만듭니다.",
-          cta: "Get Early Access →",
-          stats: "1,234 스트리머 | 89 파트너 게임사 | $2.4M 누적 보상",
-        }
-      : {
-          badge: "🎮 Streamer Monetization, Reimagined",
-          title: "Stream. Earn. Automatically.",
-          subtitle:
-            "Real-time stream analytics × blockchain auto settlement. We build a fair game streaming ecosystem.",
-          cta: "Get Early Access →",
-          stats: "1,234 Streamers | 89 Partner Games | $2.4M Total Rewards",
-        };
+  useEffect(() => {
+    const next = Array.from({ length: 15 }, () => ({
+      left: Math.random() * 100,
+      bottom: Math.random() * 100,
+      duration: Math.random() * 7 + 5,
+      delay: Math.random() * 3,
+    }));
+    setParticles(next);
+  }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const target = document.getElementById("waitlist");
-    target?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 28 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 32 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-  };
+  const particleStyles = useMemo(
+    () =>
+      particles.map((particle) => ({
+        left: `${particle.left}%`,
+        bottom: `${particle.bottom}%`,
+        animationDuration: `${particle.duration}s`,
+        animationDelay: `${particle.delay}s`,
+      })),
+    [particles]
+  );
 
   return (
-    <motion.section
-      initial="hidden"
-      animate="show"
-      variants={sectionVariants}
-      className="hero-gradient section-fade relative overflow-hidden px-4 py-20 md:py-24"
-      id="hero"
-    >
-      <div className="hero-particles" aria-hidden="true">
-        {particles.map((particle, index) => (
-          <span
-            key={`particle-${index}`}
+    <section className="relative min-h-screen overflow-hidden bg-dark hero-gradient">
+      <div className="hero-particles pointer-events-none">
+        {particleStyles.map((particle, idx) => (
+          <div
+            key={idx}
             className="particle"
             style={{
+              width: "4px",
+              height: "4px",
               left: particle.left,
-              top: particle.top,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              animationDelay: particle.delay,
-              animationDuration: particle.duration,
-              opacity: particle.opacity,
+              bottom: particle.bottom,
+              animationDuration: particle.animationDuration,
+              animationDelay: particle.animationDelay,
             }}
           />
         ))}
       </div>
-
-      <div className="container relative mx-auto flex min-h-[76vh] flex-col justify-center">
-        <motion.div
-          className="inline-flex w-fit rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-gray-200"
-          variants={itemVariants}
-        >
-          {t.badge}
-        </motion.div>
-
+      <div className="container relative z-10 flex min-h-screen flex-col items-start justify-center gap-8 px-4 py-24 md:px-0">
         <motion.h1
-          className="mt-6 max-w-4xl text-4xl font-black leading-tight text-white md:text-6xl"
-          variants={itemVariants}
+          className="section-title font-black leading-tight text-white"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          {t.title}
+          스트리밍하면
+          <br />
+          <span className="bg-clip-text bg-gradient-to-r from-mint to-purple text-transparent">
+            보상받는 세상
+          </span>
         </motion.h1>
-
         <motion.p
-          className="mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg"
-          variants={itemVariants}
+          className="max-w-xl text-lg leading-relaxed text-gray"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {t.subtitle}
+          모든 스트리머가 자신의 영향력만큼 보상받는 세상을 만듭니다.
+          <br />
+          성과 기반 자동 보상 · 소형 스트리머 25배 전환율 · USDC 즉시 정산
         </motion.p>
-
-        <motion.form
-          onSubmit={handleSubmit}
-          className="mt-8"
-          variants={itemVariants}
-        >
-          <div className="mx-auto flex max-w-md flex-row gap-2">
-            <input
-              type="email"
-              required
-              placeholder="Enter your email"
-              className="w-full rounded-full border border-white/20 bg-dark/50 px-6 py-3 text-white outline-none placeholder:text-gray-400"
-            />
-            <button
-              type="submit"
-              className="rounded-full bg-purple px-6 py-3 font-semibold text-white"
-            >
-              Get Early Access →
-            </button>
-          </div>
-        </motion.form>
-
         <motion.div
-          className="mt-10 grid max-w-3xl rounded-2xl border border-white/10 bg-[#151b31]/80 px-5 py-4 text-sm text-gray-200 md:text-base"
-          variants={itemVariants}
+          className="flex flex-wrap gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {t.stats}
+          <a
+            href="#waitlist"
+            className="rounded-full bg-purple px-7 py-3 text-sm font-bold text-white"
+          >
+            얼리 액세스 신청
+          </a>
+          <a
+            href="#problem"
+            className="rounded-full border border-white/20 px-7 py-3 text-sm font-bold text-white"
+          >
+            자세히 알아보기
+          </a>
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }
