@@ -3,112 +3,153 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-type StatProps = {
+type StatRowProps = {
   label: string;
   value: string;
-  color: string;
+  muted?: boolean;
 };
 
 const bigStreamers = {
   label: "대형 스트리머 1명",
-  budget: "$10,000",
-  icon: "🧊",
+  budget: "$10,000 예산",
+  emoji: "🧊",
+  tag: "일반적인 방식",
   stats: [
-    { label: "시청자", value: "50,000명" },
-    { label: "참여율", value: "2%" },
-    { label: "전환", value: "50명" },
+    { label: "도달 시청자", value: "50,000명" },
+    { label: "평균 참여율", value: "2%" },
+    { label: "실제 전환", value: "50명" },
+    { label: "전환당 비용", value: "$200" },
   ],
 };
 
 const smallStreamers = {
   label: "소형 스트리머 100명",
-  budget: "$100 × 100",
-  icon: "🔥",
+  budget: "$100 × 100명",
+  emoji: "🔥",
+  tag: "Enter.fun 방식",
   stats: [
-    { label: "시청자", value: "50,000명" },
-    { label: "참여율", value: "35%" },
-    { label: "전환", value: "1,250명" },
+    { label: "도달 시청자", value: "50,000명" },
+    { label: "평균 참여율", value: "35%" },
+    { label: "실제 전환", value: "1,250명" },
+    { label: "전환당 비용", value: "$8" },
   ],
 };
 
-function Stat({ label, value, color }: StatProps) {
+function StatRow({ label, value, muted = false }: StatRowProps) {
   return (
-    <div className="flex items-center justify-between">
-      <span className="text-sm text-gray">{label}</span>
-      <span className={`font-semibold ${color}`}>{value}</span>
+    <div className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+      <span className={`text-xs ${muted ? "text-white/30" : "text-white/50"}`}>{label}</span>
+      <span className={`text-sm font-semibold ${muted ? "text-white/30" : "text-mint"}`}>{value}</span>
     </div>
   );
 }
 
 export default function Multiplier25x() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="multiplier" className="bg-dark2 py-24" ref={ref}>
+    <section id="multiplier" className="relative overflow-hidden bg-dark py-24 md:py-32" ref={ref}>
+      {/* Radial accent */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30"
+        style={{ background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%)" }} />
+
       <div className="container px-4">
-        <p className="section-badge">⚡ 같은 비용, 25배의 결과</p>
-        <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">
-          $10,000의 두 가지 사용법
-        </h2>
-        <p className="mt-3 max-w-2xl text-gray">
-          같은 비용으로도, 커뮤니티의 밀도가 결과를 완전히 바꿉니다.
-        </p>
-        <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto_1fr] items-center max-w-4xl mx-auto">
+        <div className="max-w-xl">
+          <span className="section-badge">효율성 비교</span>
+          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
+            같은 $10,000,
+            <br />
+            전혀 다른 결과
+          </h2>
+          <p className="mt-4 text-base text-gray">
+            커뮤니티의 밀도가 전환율을 결정합니다. 소형 스트리머는 팬과의 신뢰가 다릅니다.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-[1fr_auto_1fr] items-center max-w-4xl mx-auto">
+          {/* Big streamer card */}
           <motion.div
-            className="glass-card rounded-2xl border border-white/5 p-8"
-            initial={{ opacity: 0, x: -60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
-            transition={{ duration: 0.6 }}
+            className="rounded-2xl border border-white/5 bg-white/[0.02] p-6"
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="text-5xl mb-4">{bigStreamers.icon}</p>
-            <h3 className="text-xl font-bold text-white/70">{bigStreamers.label}</h3>
-            <p className="text-sm text-white/40">{bigStreamers.budget}</p>
-            <div className="mt-6 space-y-3">
-              {bigStreamers.stats.map((item) => (
-                <Stat
-                  key={item.label}
-                  label={item.label}
-                  value={item.value}
-                  color="text-white/50"
-                />
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-white/40">
+                  {bigStreamers.tag}
+                </span>
+                <p className="mt-3 text-2xl">{bigStreamers.emoji}</p>
+              </div>
+            </div>
+            <p className="mt-3 text-base font-bold text-white/60">{bigStreamers.label}</p>
+            <p className="text-xs text-white/30">{bigStreamers.budget}</p>
+            <div className="mt-5">
+              {bigStreamers.stats.map((s) => (
+                <StatRow key={s.label} label={s.label} value={s.value} muted />
               ))}
             </div>
           </motion.div>
-          <motion.p
-            className="text-4xl font-black text-white/30 text-center"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.45, delay: 0.2 }}
-          >
-            VS
-          </motion.p>
+
+          {/* VS */}
           <motion.div
-            className="glass-card rounded-2xl border border-mint/30 p-8 glow-mint bg-mint/5"
-            initial={{ opacity: 0, x: 60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
-            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center justify-center gap-1 py-4 md:py-0"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
+            transition={{ delay: 0.2, duration: 0.4, type: "spring", stiffness: 200 }}
           >
-            <p className="text-5xl mb-4">{smallStreamers.icon}</p>
-            <h3 className="text-xl font-bold text-mint">{smallStreamers.label}</h3>
-            <p className="text-sm text-mint/60">{smallStreamers.budget}</p>
-            <div className="mt-6 space-y-3">
-              {smallStreamers.stats.map((item) => (
-                <Stat key={item.label} label={item.label} value={item.value} color="text-mint" />
+            <span className="text-3xl font-black tracking-[-0.04em] text-white/15">VS</span>
+          </motion.div>
+
+          {/* Small streamers card */}
+          <motion.div
+            className="relative rounded-2xl border border-mint/20 bg-mint/[0.03] p-6 glow-mint"
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="rounded-full bg-mint/10 px-2.5 py-1 text-[10px] font-semibold text-mint">
+                  {smallStreamers.tag}
+                </span>
+                <p className="mt-3 text-2xl">{smallStreamers.emoji}</p>
+              </div>
+            </div>
+            <p className="mt-3 text-base font-bold text-mint">{smallStreamers.label}</p>
+            <p className="text-xs text-mint/50">{smallStreamers.budget}</p>
+            <div className="mt-5">
+              {smallStreamers.stats.map((s) => (
+                <StatRow key={s.label} label={s.label} value={s.value} />
               ))}
             </div>
           </motion.div>
         </div>
+
+        {/* Result banner */}
         <motion.div
-          className="mt-12 text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.3 }}
+          className="mt-10 mx-auto max-w-4xl rounded-2xl bg-gradient-to-r from-mint/8 via-mint/5 to-purple/8 border border-mint/10 px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p className="text-6xl font-black text-mint">25x</p>
-          <p className="mt-2 text-lg text-gray">
-            소형 스트리머의 친밀한 커뮤니티가 만드는 압도적 차이
+          <div>
+            <p className="text-[3.5rem] font-black leading-none tracking-[-0.05em] gradient-text">
+              25x
+            </p>
+            <p className="mt-1 text-sm font-semibold text-white">더 높은 전환율</p>
+          </div>
+          <div className="hidden md:block w-px h-12 bg-white/5" />
+          <p className="text-sm leading-relaxed text-gray max-w-xs">
+            소형 스트리머의 밀접한 커뮤니티가 만들어내는<br className="hidden md:block" /> 압도적인 차이입니다.
           </p>
+          <div className="hidden md:block w-px h-12 bg-white/5" />
+          <div className="text-center">
+            <p className="text-2xl font-black text-white">$8</p>
+            <p className="text-xs text-white/40">전환당 비용</p>
+            <p className="text-xs text-white/20 line-through">$200 (대형)</p>
+          </div>
         </motion.div>
       </div>
     </section>
