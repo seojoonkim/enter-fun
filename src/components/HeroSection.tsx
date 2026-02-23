@@ -103,16 +103,16 @@ export default function HeroSection() {
             <motion.div variants={childVariants}>
               <span className="section-badge">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-mint" />
-                게임 스트리머 수익 플랫폼
+                게임사 × 스트리머 수익 직연결
               </span>
             </motion.div>
 
             <motion.h1 className="display-title text-white" variants={childVariants}>
               스트리머가
               <br />
-              <span className="gradient-text">게임을 팔면,</span>
+              <span className="gradient-text">방송하면,</span>
               <br />
-              수익이 된다.
+              게임사가 낸다.
             </motion.h1>
 
             <motion.p
@@ -123,12 +123,14 @@ export default function HeroSection() {
               <span className="font-semibold text-white">67%</span>가
               스트리머를 통해 게임을 구매합니다.
               <br />
+              게임사는 스트리머를 필요로 합니다.
+              <br />
               그러나 스트리머{" "}
               <span className="font-semibold text-white">53%</span>의
-              수익은 0원입니다.
+              수익은 아직도 0원입니다.
               <br />
               <span className="mt-1.5 block font-medium text-mint">
-                Enter.fun이 이 불균형을 해결합니다.
+                Enter.fun이 게임사 예산을 스트리머에게 직접 연결합니다.
               </span>
             </motion.p>
 
@@ -174,15 +176,22 @@ export default function HeroSection() {
               style={{ background: "radial-gradient(ellipse at center, rgba(0,212,170,0.07) 0%, rgba(123,97,255,0.03) 60%, transparent 100%)", filter: "blur(20px)" }} />
 
             <div className="relative card-glass shadow-2xl overflow-hidden border border-white/10">
-              {/* Top bar */}
-              <div className="flex items-center justify-between border-b border-white/5 bg-white/[0.03] px-5 py-3">
-                <div className="flex gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-mint/40" />
+              {/* Service Intro Image Banner */}
+              <div className="relative overflow-hidden border-b border-white/5" style={{ height: "160px" }}>
+                <img
+                  src="/images/service-intro.png"
+                  alt="Enter.fun 서비스 소개"
+                  className="w-full h-full object-cover object-center"
+                  style={{ opacity: 0.85 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111128]/80" />
+                <div className="absolute bottom-3 left-5 right-5 flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-white/50">게임사 → 스트리머 수익 연결</span>
+                  <span className="flex items-center gap-1.5 text-[10px] text-mint/70">
+                    <span className="h-1.5 w-1.5 rounded-full bg-mint animate-pulse" />
+                    실시간 연결
+                  </span>
                 </div>
-                <span className="text-[11px] font-semibold text-white/25 tracking-wider uppercase">Enter.fun Dashboard</span>
-                <div className="w-14" />
               </div>
 
               {/* Before / After */}
