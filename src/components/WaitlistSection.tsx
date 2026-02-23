@@ -59,7 +59,7 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative overflow-hidden py-16 md:py-24"
       ref={sectionRef}
       style={{ background: "linear-gradient(180deg, #0d0d1a 0%, #08081a 100%)" }}
     >
@@ -116,16 +116,40 @@ export default function WaitlistSection() {
           {/* Perks */}
           <div className="mb-7 grid grid-cols-3 gap-3">
             {[
-              { icon: "💸", label: "수수료 0%", sub: "첫 3개월" },
-              { icon: "🎯", label: "우선 매칭", sub: "캠페인 우선권" },
-              { icon: "⚡", label: "즉시 정산", sub: "USDC 자동" },
+              {
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="10" cy="10" r="8"/>
+                    <path d="M10 6v1m0 6v1M7.5 8.5c0-.83.67-1.5 1.5-1.5h2a1.5 1.5 0 010 3h-2a1.5 1.5 0 000 3h2a1.5 1.5 0 001.5-1.5"/>
+                  </svg>
+                ),
+                label: "수수료 0%", sub: "첫 3개월",
+              },
+              {
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="10" cy="10" r="8"/>
+                    <circle cx="10" cy="10" r="4"/>
+                    <circle cx="10" cy="10" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                ),
+                label: "우선 매칭", sub: "캠페인 우선권",
+              },
+              {
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 2L4 11h7l-2 7 7-9h-7l2-7z"/>
+                  </svg>
+                ),
+                label: "즉시 정산", sub: "USDC 자동",
+              },
             ].map((perk) => (
               <div
                 key={perk.label}
                 className="rounded-xl border border-mint/10 bg-mint/[0.04] px-3 py-3 text-center"
               >
-                <p className="text-xl">{perk.icon}</p>
-                <p className="mt-1 text-xs font-bold text-white">{perk.label}</p>
+                <div className="flex justify-center text-mint">{perk.icon}</div>
+                <p className="mt-1.5 text-xs font-bold text-white">{perk.label}</p>
                 <p className="text-[10px] text-gray">{perk.sub}</p>
               </div>
             ))}

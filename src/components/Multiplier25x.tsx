@@ -49,7 +49,7 @@ export default function Multiplier25x() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="multiplier" className="relative overflow-hidden bg-dark py-24 md:py-32" ref={ref}>
+    <section id="multiplier" className="relative overflow-hidden bg-dark py-16 md:py-24" ref={ref}>
       {/* Radial accent */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30"
         style={{ background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%)" }} />
@@ -80,7 +80,11 @@ export default function Multiplier25x() {
                 <span className="rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-white/40">
                   {bigStreamers.tag}
                 </span>
-                <p className="mt-3 text-2xl">{bigStreamers.emoji}</p>
+                <div className="mt-3 text-white/20">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                  </svg>
+                </div>
               </div>
             </div>
             <p className="mt-3 text-base font-bold text-white/60">{bigStreamers.label}</p>
@@ -114,7 +118,11 @@ export default function Multiplier25x() {
                 <span className="rounded-full bg-mint/10 px-2.5 py-1 text-[10px] font-semibold text-mint">
                   {smallStreamers.tag}
                 </span>
-                <p className="mt-3 text-2xl">{smallStreamers.emoji}</p>
+                <div className="mt-3 text-mint">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                  </svg>
+                </div>
               </div>
             </div>
             <p className="mt-3 text-base font-bold text-mint">{smallStreamers.label}</p>

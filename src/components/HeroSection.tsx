@@ -67,6 +67,18 @@ export default function HeroSection() {
         ))}
       </div>
 
+      {/* Streamer bg image — right side bleed */}
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 md:block"
+        style={{
+          backgroundImage: "url('/images/hero-streamer.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center left",
+          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.55) 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.55) 100%)",
+        }}
+      />
+
       {/* Background orb */}
       <motion.div
         className="pointer-events-none absolute top-1/4 left-1/2 h-[700px] w-[700px] -translate-x-1/2 rounded-full"
@@ -166,7 +178,7 @@ export default function HeroSection() {
             <div className="absolute inset-x-8 top-8 h-full rounded-3xl opacity-60"
               style={{ background: "radial-gradient(ellipse at center, rgba(0,212,170,0.08) 0%, rgba(123,97,255,0.04) 60%, transparent 100%)", filter: "blur(24px)" }} />
 
-            <div className="relative gradient-border shadow-2xl overflow-hidden">
+            <div className="relative card-glass shadow-2xl overflow-hidden border border-white/10">
               {/* Top bar */}
               <div className="flex items-center justify-between border-b border-white/5 bg-white/[0.03] px-5 py-3">
                 <div className="flex gap-1.5">

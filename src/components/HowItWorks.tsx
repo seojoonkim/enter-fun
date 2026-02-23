@@ -48,8 +48,18 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" className="relative overflow-hidden bg-dark2 py-24 md:py-32">
-      <div className="container px-4" ref={ref}>
+    <section id="how-it-works" className="relative overflow-hidden bg-dark2 py-16 md:py-24">
+      {/* Flow image — decorative background */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 opacity-[0.07]"
+        style={{
+          backgroundImage: "url('/images/how-it-works-flow.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+      />
+
+      <div className="container px-4 relative z-10" ref={ref}>
         <div className="text-center max-w-xl mx-auto">
           <span className="section-badge">사용법</span>
           <h2 className="mt-4 section-title text-white">

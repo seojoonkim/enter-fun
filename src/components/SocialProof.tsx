@@ -28,7 +28,7 @@ export default function SocialProof() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="social-proof" className="relative bg-dark py-24 md:py-32 overflow-hidden" ref={ref}>
+    <section id="social-proof" className="relative bg-dark py-16 md:py-24 overflow-hidden" ref={ref}>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
@@ -58,13 +58,19 @@ export default function SocialProof() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
             >
-              <div className="flex items-start justify-between gap-3 mb-4">
-                <p className="text-sm font-bold text-white">{r.source}</p>
-                <span className="shrink-0 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-white/30">
-                  {r.year}
-                </span>
+              <div className="flex items-start gap-3 mb-3">
+                {/* Quote icon */}
+                <svg className="shrink-0 mt-0.5 text-mint/40" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M3 6c0-1.7 1.3-3 3-3v2c-.55 0-1 .45-1 1v1h2v4H3V6zm7 0c0-1.7 1.3-3 3-3v2c-.55 0-1 .45-1 1v1h2v4h-4V6z"/>
+                </svg>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-bold text-white">{r.source}</p>
+                    <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-white/30">{r.year}</span>
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray">{r.quote}</p>
+                </div>
               </div>
-              <p className="text-sm leading-relaxed text-gray">"{r.quote}"</p>
             </motion.div>
           ))}
         </motion.div>

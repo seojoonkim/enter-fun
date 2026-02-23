@@ -50,13 +50,24 @@ export default function MarketProblem() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="market-problem" className="relative overflow-hidden bg-dark2 py-24 md:py-32">
+    <section id="market-problem" className="relative overflow-hidden bg-dark2 py-16 md:py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Decorative image */}
+      <div
+        className="pointer-events-none absolute right-0 top-0 h-full w-1/3 hidden lg:block opacity-[0.06]"
+        style={{
+          backgroundImage: "url('/images/market-problem.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center right",
         }}
       />
 

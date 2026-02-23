@@ -50,7 +50,7 @@ export default function SteamComparison() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="comparison" className="relative bg-dark2 py-24 md:py-32 overflow-hidden" ref={ref}>
+    <section id="comparison" className="relative bg-dark2 py-16 md:py-24 overflow-hidden" ref={ref}>
       <div
         className="pointer-events-none absolute inset-0"
         style={{

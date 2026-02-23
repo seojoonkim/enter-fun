@@ -19,35 +19,26 @@ type Product = {
 };
 
 const StreamerVisual = () => (
-  <div className="relative rounded-2xl bg-[#0a0a1a] border border-white/5 p-5 overflow-hidden">
-    <p className="text-[10px] font-semibold uppercase tracking-widest text-white/30 mb-4">이번 달 수익</p>
-    <div className="space-y-2.5">
-      {[
-        { label: "스트리밍 캠페인", val: 320, color: "#00d4aa" },
-        { label: "전환 보너스", val: 160, color: "#7b61ff" },
-        { label: "시청자 이벤트", val: 80, color: "#00d4aa" },
-      ].map((bar) => (
-        <div key={bar.label} className="flex items-center gap-3">
-          <span className="text-[10px] text-white/40 w-24 shrink-0">{bar.label}</span>
-          <div className="flex-1 h-5 rounded-full bg-white/5 overflow-hidden">
-            <motion.div
-              className="h-full rounded-full"
-              style={{ background: bar.color }}
-              initial={{ width: 0 }}
-              animate={{ width: `${bar.val / 5.6}%` }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            />
-          </div>
-          <span className="text-xs font-bold text-white w-10 text-right">${bar.val}</span>
+  <div className="relative rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a1a]" style={{ minHeight: 220 }}>
+    {/* Background dashboard image */}
+    <img
+      src="/images/streamer-dashboard.png"
+      alt="스트리머 수익 대시보드"
+      className="w-full h-full object-cover opacity-80"
+      style={{ minHeight: 220 }}
+    />
+    {/* Overlay stats */}
+    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0a0a1a] via-[#0a0a1a]/80 to-transparent px-5 py-4">
+      <div className="flex items-end justify-between">
+        <div>
+          <p className="text-[10px] text-white/40">수익 배분율</p>
+          <p className="text-2xl font-black text-mint">85%</p>
+          <p className="text-[10px] text-white/30 mt-0.5">스트리머가 가져가는 몫</p>
         </div>
-      ))}
-    </div>
-    <div className="mt-5 flex items-end justify-between">
-      <div>
-        <p className="text-[10px] text-white/30">총 수익</p>
-        <p className="text-2xl font-black text-mint">$560</p>
+        <span className="rounded-full bg-mint/10 border border-mint/20 px-3 py-1 text-[10px] font-bold text-mint">
+          ↑ 에이전시 50~70% 대비
+        </span>
       </div>
-      <span className="rounded-full bg-mint/10 px-3 py-1 text-[10px] font-bold text-mint">↑ 24% MoM</span>
     </div>
   </div>
 );
@@ -112,7 +103,7 @@ const GamerVisual = () => (
 const products: Product[] = [
   {
     key: "streamer",
-    tab: "🎙️ 스트리머",
+    tab: "스트리머",
     headline: "스트리밍만 하면 돼요.",
     subhead: "나머진 자동입니다.",
     metric: "85%",
@@ -129,7 +120,7 @@ const products: Product[] = [
   },
   {
     key: "studio",
-    tab: "🎮 게임사",
+    tab: "게임사",
     headline: "전환 없으면 비용 없음.",
     subhead: "성과 기반 과금.",
     metric: "25x",
@@ -146,7 +137,7 @@ const products: Product[] = [
   },
   {
     key: "gamer",
-    tab: "👾 게이머",
+    tab: "게이머",
     headline: "좋아하는 스트리머에게서",
     subhead: "더 싸게 삽니다.",
     metric: "15%",
@@ -170,7 +161,7 @@ export default function Products() {
   const current = products.find((p) => p.key === active)!;
 
   return (
-    <section id="products" className="relative bg-dark py-24 md:py-32">
+    <section id="products" className="relative bg-dark py-16 md:py-24">
       <div className="container px-4" ref={ref}>
         <div className="max-w-xl">
           <span className="section-badge">핵심 제품</span>
@@ -191,24 +182,44 @@ export default function Products() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ delay: 0.2 }}
         >
-          {products.map((p) => (
-            <button
-              key={p.key}
-              onClick={() => setActive(p.key)}
-              className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-                active === p.key
-                  ? "text-dark"
-                  : "border-white/10 text-gray hover:border-white/20 hover:text-white"
-              }`}
-              style={
-                active === p.key
-                  ? { backgroundColor: p.color, borderColor: p.color }
-                  : {}
-              }
-            >
-              {p.tab}
-            </button>
-          ))}
+          {products.map((p) => {
+            const icons: Record<string, React.ReactNode> = {
+              streamer: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="7" cy="4" r="2.5"/>
+                  <path d="M7 7v2m0 0a3 3 0 01-3 3h6a3 3 0 01-3-3z"/>
+                </svg>
+              ),
+              studio: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1" y="3" width="12" height="8" rx="1.5"/>
+                  <circle cx="5" cy="7" r="1.5"/>
+                  <path d="M9 5.5h2M9 8.5h2"/>
+                </svg>
+              ),
+              gamer: (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 7a5 5 0 0010 0V5a5 5 0 00-10 0v2z"/>
+                  <path d="M5 6v2M4 7h2M9 7h2"/>
+                </svg>
+              ),
+            };
+            return (
+              <button
+                key={p.key}
+                onClick={() => setActive(p.key)}
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                  active === p.key
+                    ? "text-dark"
+                    : "border-white/10 text-gray hover:border-white/20 hover:text-white"
+                }`}
+                style={active === p.key ? { backgroundColor: p.color, borderColor: p.color } : {}}
+              >
+                {icons[p.key]}
+                {p.tab}
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* Content */}
