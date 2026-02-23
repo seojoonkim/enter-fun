@@ -13,9 +13,9 @@ const steps = [
         <path d="M2 12l10 5 10-5"/>
       </svg>
     ),
-    title: "플러그인 설치",
-    desc: "Twitch, 치지직, 숲에 Enter.fun 플러그인을 연결합니다.",
-    detail: "30초면 끝. 코딩 불필요.",
+    title: "플러그인 연결",
+    desc: "Twitch, 치지직, 숲 — 쓰는 플랫폼에 플러그인 연결. 30초.",
+    detail: "코딩 불필요. 설정 없음.",
   },
   {
     num: "02",
@@ -25,8 +25,8 @@ const steps = [
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
       </svg>
     ),
-    title: "AI 자동 매칭",
-    desc: "평소처럼 스트리밍합니다. AI가 임팩트 모먼트를 감지하고 최적의 캠페인을 자동 매칭합니다.",
+    title: "그냥 방송하기",
+    desc: "그냥 방송하세요. AI가 알아서 감지하고, 맞는 캠페인 붙여줍니다.",
     detail: "개입 없음. 자동화 100%.",
   },
   {
@@ -37,9 +37,9 @@ const steps = [
         <path d="M2 10h20"/>
       </svg>
     ),
-    title: "USDC 즉시 정산",
-    desc: "전환이 발생하면 블록체인 기반으로 즉시 보상합니다. 투명하고, 자동이며, 실시간입니다.",
-    detail: "지연 없음. 블록체인 기록.",
+    title: "USDC 자동 입금",
+    desc: "전환 발생 → USDC 자동 입금. 월정산 같은 거 없어요.",
+    detail: "블록체인. 지연 없음.",
   },
 ];
 
@@ -51,14 +51,14 @@ export default function HowItWorks() {
     <section id="how-it-works" className="relative overflow-hidden bg-dark2 py-24 md:py-32">
       <div className="container px-4" ref={ref}>
         <div className="text-center max-w-xl mx-auto">
-          <span className="section-badge">작동 원리</span>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-            3단계로 시작하는
+          <span className="section-badge">사용법</span>
+          <h2 className="mt-4 section-title text-white">
+            3단계면 끝.
             <br />
-            <span className="gradient-text">새로운 수익 구조</span>
+            <span className="gradient-text">나머진 알아서 합니다.</span>
           </h2>
           <p className="mt-4 text-base text-gray">
-            복잡한 설정 없이. 기존 방식 그대로 스트리밍하면, 나머지는 Enter.fun이 합니다.
+            복잡한 설정 없음. 그냥 방송하면, Enter.fun이 알아서 돈을 만들어 줍니다.
           </p>
         </div>
 

@@ -56,14 +56,14 @@ export default function Multiplier25x() {
 
       <div className="container px-4">
         <div className="max-w-xl">
-          <span className="section-badge">효율성 비교</span>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-            같은 $10,000,
+          <span className="section-badge">핵심 수치</span>
+          <h2 className="mt-4 section-title text-white">
+            같은 $10,000.
             <br />
-            전혀 다른 결과
+            <span className="gradient-text">결과는 25배 차이.</span>
           </h2>
           <p className="mt-4 text-base text-gray">
-            커뮤니티의 밀도가 전환율을 결정합니다. 소형 스트리머는 팬과의 신뢰가 다릅니다.
+            소형 스트리머 100명의 신뢰 기반 커뮤니티가 만들어내는 압도적인 차이입니다.
           </p>
         </div>
 

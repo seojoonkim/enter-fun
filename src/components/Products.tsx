@@ -113,10 +113,10 @@ const products: Product[] = [
   {
     key: "streamer",
     tab: "🎙️ 스트리머",
-    headline: "스트리밍만 하세요.",
-    subhead: "보상은 자동으로 쌓입니다.",
-    metric: "$500+",
-    metricLabel: "평균 월 추가 수익",
+    headline: "스트리밍만 하면 돼요.",
+    subhead: "나머진 자동입니다.",
+    metric: "85%",
+    metricLabel: "스트리머 수익 배분율",
     features: [
       "Twitch · 치지직 · 숲 통합 연동",
       "AI 임팩트 모먼트 자동 감지",
@@ -130,8 +130,8 @@ const products: Product[] = [
   {
     key: "studio",
     tab: "🎮 게임사",
-    headline: "결과에만 비용을 쓰세요.",
-    subhead: "성과가 없으면 비용도 없습니다.",
+    headline: "전환 없으면 비용 없음.",
+    subhead: "성과 기반 과금.",
     metric: "25x",
     metricLabel: "ROI 향상",
     features: [
@@ -147,8 +147,8 @@ const products: Product[] = [
   {
     key: "gamer",
     tab: "👾 게이머",
-    headline: "좋아하는 스트리머에게서.",
-    subhead: "더 싸게, 더 투명하게.",
+    headline: "좋아하는 스트리머에게서",
+    subhead: "더 싸게 삽니다.",
     metric: "15%",
     metricLabel: "수수료 (Steam 30%)",
     features: [
@@ -174,13 +174,13 @@ export default function Products() {
       <div className="container px-4" ref={ref}>
         <div className="max-w-xl">
           <span className="section-badge">핵심 제품</span>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-            모두를 위한
+          <h2 className="mt-4 section-title text-white">
+            스트리머, 게임사, 게이머.
             <br />
-            <span className="gradient-text">새로운 게임 경제</span>
+            <span className="gradient-text">셋 다 이깁니다.</span>
           </h2>
           <p className="mt-4 text-base text-gray">
-            스트리머, 게임사, 게이머. 세 주체 모두가 이기는 구조를 설계했습니다.
+            세 주체 모두에게 작동하는 구조를 설계했습니다.
           </p>
         </div>
 

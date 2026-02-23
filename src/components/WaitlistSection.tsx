@@ -1,10 +1,13 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { type FormEvent } from "react";
-import { AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { isSupabaseReady, supabase } from "@/lib/supabase";
+
+const TOTAL_SLOTS = 1000;
+const FILLED_SLOTS = 320;
+const FILLED_PCT = Math.round((FILLED_SLOTS / TOTAL_SLOTS) * 100);
 
 export default function WaitlistSection() {
   const [email, setEmail] = useState("");
@@ -20,10 +23,7 @@ export default function WaitlistSection() {
     const nextList = Array.isArray(parsed)
       ? parsed.filter((item: string) => typeof item === "string")
       : [];
-    if (nextList.includes(nextEmail)) {
-      setStatus("duplicate");
-      return false;
-    }
+    if (nextList.includes(nextEmail)) { setStatus("duplicate"); return false; }
     nextList.push(nextEmail);
     localStorage.setItem(key, JSON.stringify(nextList));
     setStatus("success");
@@ -61,12 +61,11 @@ export default function WaitlistSection() {
       id="waitlist"
       className="relative overflow-hidden py-24 md:py-32"
       ref={sectionRef}
-      style={{ background: "linear-gradient(180deg, #0d0d1a 0%, #0a0a18 100%)" }}
+      style={{ background: "linear-gradient(180deg, #0d0d1a 0%, #08081a 100%)" }}
     >
-      {/* Background glow */}
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+          className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-35"
           style={{
             background:
               "radial-gradient(circle, rgba(0,212,170,0.12) 0%, rgba(123,97,255,0.06) 50%, transparent 70%)",
@@ -81,22 +80,36 @@ export default function WaitlistSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header */}
           <div className="text-center mb-8">
             <span className="section-badge">스트리머 얼리 액세스</span>
-            <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-              지금 신청하면,
+            <h2 className="mt-4 section-title text-white">
+              먼저 시작하는 사람이
               <br />
-              <span className="gradient-text">가장 먼저 시작합니다.</span>
+              <span className="gradient-text">먼저 법니다.</span>
             </h2>
             <p className="mt-4 text-base text-gray">
-              얼리 액세스 스트리머에게는{" "}
-              <span className="font-semibold text-white">첫 3개월 수수료 0%</span>와{" "}
-              <span className="font-semibold text-white">우선 캠페인 매칭</span> 혜택이 제공됩니다.
+              얼리 액세스 스트리머:{" "}
+              <span className="font-semibold text-white">첫 3개월 수수료 0%</span>
+              , 캠페인 우선 매칭.
             </p>
-            <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-red-400 font-semibold">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
-              스트리머 얼리 액세스 1,000자리 한정
+          </div>
+
+          {/* Progress bar */}
+          <div className="mb-7">
+            <div className="flex items-center justify-between text-xs mb-2">
+              <span className="text-white/40">얼리 액세스 신청 현황</span>
+              <span className="font-semibold text-mint">{FILLED_SLOTS} / {TOTAL_SLOTS}자리</span>
+            </div>
+            <div className="h-2 w-full rounded-full bg-white/5 overflow-hidden">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-mint to-purple"
+                initial={{ width: 0 }}
+                animate={isInView ? { width: `${FILLED_PCT}%` } : { width: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as [number,number,number,number] }}
+              />
+            </div>
+            <p className="mt-1.5 text-right text-[11px] font-semibold text-red-400">
+              {TOTAL_SLOTS - FILLED_SLOTS}자리 남음
             </p>
           </div>
 
@@ -109,7 +122,7 @@ export default function WaitlistSection() {
             ].map((perk) => (
               <div
                 key={perk.label}
-                className="rounded-xl border border-mint/10 bg-mint/5 px-3 py-3 text-center"
+                className="rounded-xl border border-mint/10 bg-mint/[0.04] px-3 py-3 text-center"
               >
                 <p className="text-xl">{perk.icon}</p>
                 <p className="mt-1 text-xs font-bold text-white">{perk.label}</p>
@@ -126,27 +139,23 @@ export default function WaitlistSection() {
               placeholder="내 이메일 주소"
               type="email"
               required
-              className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-sm text-white placeholder-white/30 outline-none backdrop-blur-sm transition focus:border-mint focus:ring-1 focus:ring-mint/20"
+              className="input flex-1 text-sm"
             />
             <button
               type="submit"
               disabled={loading}
-              className="shrink-0 rounded-full bg-mint px-7 py-3.5 text-sm font-bold text-dark shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(0,212,170,0.4)] disabled:opacity-60 active:scale-[0.98]"
+              className="btn-primary shrink-0"
             >
               {loading ? "처리 중…" : "신청하기 →"}
             </button>
           </form>
 
-          {/* Status message */}
           <AnimatePresence>
             {status !== "idle" && (
               <motion.p
                 className={`mt-3 text-center text-sm ${
-                  status === "success"
-                    ? "text-mint"
-                    : status === "duplicate"
-                    ? "text-yellow-400"
-                    : "text-red-400"
+                  status === "success" ? "text-mint" :
+                  status === "duplicate" ? "text-yellow-400" : "text-red-400"
                 }`}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -159,10 +168,10 @@ export default function WaitlistSection() {
             )}
           </AnimatePresence>
 
-          {/* Social proof */}
-          <p className="mt-6 text-center text-xs text-white/30">
+          <p className="mt-5 text-center text-xs text-white/25">
             이미{" "}
-            <span className="font-semibold text-white/60">320명의 스트리머</span>가 신청했습니다
+            <span className="font-semibold text-white/50">{FILLED_SLOTS}명의 스트리머</span>가
+            신청했습니다
           </p>
         </motion.div>
       </div>

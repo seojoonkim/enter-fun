@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "어떻게 작동하나요", href: "#how-it-works" },
+  { label: "작동 원리", href: "#how-it-works" },
   { label: "제품", href: "#products" },
-  { label: "비교", href: "#comparison" },
+  { label: "수수료 비교", href: "#comparison" },
 ];
 
 export default function Navbar() {

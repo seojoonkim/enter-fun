@@ -10,7 +10,7 @@ export default function Footer() {
               <span className="text-white">.fun</span>
             </p>
             <p className="mt-2 text-sm leading-relaxed text-gray">
-              스트리머가 보상받는 세상을 만듭니다.
+              스트리머가 정당하게 보상받는 구조를 만듭니다.
               <br />
               게임에서 시작해, 모든 라이브 커머스로.
             </p>
