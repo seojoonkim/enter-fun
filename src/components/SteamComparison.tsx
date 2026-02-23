@@ -50,7 +50,7 @@ export default function SteamComparison() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="comparison" className="relative bg-dark2 py-16 md:py-24 overflow-hidden" ref={ref}>
+    <section id="comparison" className="relative bg-dark2 py-14 md:py-20 overflow-hidden" ref={ref}>
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -58,19 +58,30 @@ export default function SteamComparison() {
             "radial-gradient(ellipse 60% 40% at 0% 100%, rgba(123,97,255,0.06), transparent)",
         }}
       />
+      {/* Comparison visual — right side decoration */}
+      <div
+        className="pointer-events-none absolute right-0 inset-y-0 w-2/5 hidden lg:block opacity-[0.07]"
+        style={{
+          backgroundImage: "url('/images/comparison-visual.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center left",
+          maskImage: "linear-gradient(to right, transparent 0%, black 60%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 60%)",
+        }}
+      />
 
       <div className="container px-4 relative z-10">
         <div className="max-w-xl">
           <span className="section-badge">수수료 비교</span>
           <h2 className="mt-4 section-title text-white">
-            에이전시는 절반을 떼갑니다.
+            에이전시 수수료는 최대 50%.
             <br />
-            <span className="gradient-text">우린 15%만 받아요.</span>
+            <span className="gradient-text">Enter.fun은 15%입니다.</span>
           </h2>
-          <p className="mt-4 text-base text-gray">
+          <p className="mt-4 text-base leading-[1.75] text-gray">
             나머지{" "}
             <span className="font-semibold text-white">85%는 전부 스트리머</span>에게.
-            계약서 없이, 실적 그대로, 블록체인으로 투명하게.
+            계약서 없이, 실적 기반, 블록체인으로 투명하게 정산합니다.
           </p>
         </div>
 
@@ -132,12 +143,12 @@ export default function SteamComparison() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <p className="text-lg font-semibold text-white">
-            나머지{" "}
+          <p className="text-base font-semibold text-white/70">
+            수익의{" "}
             <span className="text-[2.5rem] font-black text-mint tracking-[-0.04em]">85%</span>
-            {" "}는 전부 스트리머 몫.
+            {" "}는 스트리머에게 돌아갑니다.
           </p>
-          <p className="mt-2 text-sm text-gray">계약서 없이. 블록체인으로 투명하게. 숨겨진 공제 없음.</p>
+          <p className="mt-2 text-sm text-gray">숨겨진 공제 없음 · 계약금 요구 없음 · 블록체인 투명 정산</p>
         </motion.div>
       </div>
     </section>

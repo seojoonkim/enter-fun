@@ -28,18 +28,27 @@ export default function SocialProof() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="social-proof" className="relative bg-dark py-16 md:py-24 overflow-hidden" ref={ref}>
+    <section id="social-proof" className="relative bg-dark py-14 md:py-20 overflow-hidden" ref={ref}>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      {/* Research bg image */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "url('/images/social-proof-bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
 
       <div className="container px-4">
-        <div className="max-w-xl mb-12">
+        <div className="max-w-xl mb-8">
           <span className="section-badge">근거</span>
           <h2 className="mt-4 section-title text-white">
-            근거가 있습니다.
+            연구가 뒷받침합니다.
           </h2>
-          <p className="mt-4 text-base text-gray">
-            학술 연구와 시장 데이터가 이 모델을 뒷받침합니다.
+          <p className="mt-4 text-base leading-[1.75] text-gray">
+            Enter.fun의 모델은 학술 연구와 시장 데이터를 기반으로 설계되었습니다.
           </p>
         </div>
 

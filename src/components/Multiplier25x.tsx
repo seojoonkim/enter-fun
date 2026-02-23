@@ -13,7 +13,7 @@ const bigStreamers = {
   label: "대형 스트리머 1명",
   budget: "$10,000 예산",
   emoji: "🧊",
-  tag: "일반적인 방식",
+  tag: "기존 방식",
   stats: [
     { label: "도달 시청자", value: "50,000명" },
     { label: "평균 참여율", value: "2%" },
@@ -49,8 +49,16 @@ export default function Multiplier25x() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="multiplier" className="relative overflow-hidden bg-dark py-16 md:py-24" ref={ref}>
-      {/* Radial accent */}
+    <section id="multiplier" className="relative overflow-hidden bg-dark py-14 md:py-20" ref={ref}>
+      {/* Decorative background image */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-64 opacity-[0.05]"
+        style={{
+          backgroundImage: "url('/images/multiplier-visual.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <div className="pointer-events-none absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30"
         style={{ background: "radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%)" }} />
 
@@ -62,12 +70,12 @@ export default function Multiplier25x() {
             <br />
             <span className="gradient-text">결과는 25배 차이.</span>
           </h2>
-          <p className="mt-4 text-base text-gray">
-            소형 스트리머 100명의 신뢰 기반 커뮤니티가 만들어내는 압도적인 차이입니다.
+          <p className="mt-4 text-base leading-[1.75] text-gray">
+            신뢰 기반 소형 커뮤니티 100개가 만들어내는 효율의 차이입니다.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-[1fr_auto_1fr] items-center max-w-4xl mx-auto">
+        <div className="mt-10 grid gap-5 md:grid-cols-[1fr_auto_1fr] items-center max-w-4xl mx-auto">
           {/* Big streamer card */}
           <motion.div
             className="rounded-2xl border border-white/5 bg-white/[0.02] p-6"
@@ -149,8 +157,8 @@ export default function Multiplier25x() {
             <p className="mt-1 text-sm font-semibold text-white">더 높은 전환율</p>
           </div>
           <div className="hidden md:block w-px h-12 bg-white/5" />
-          <p className="text-sm leading-relaxed text-gray max-w-xs">
-            소형 스트리머의 밀접한 커뮤니티가 만들어내는<br className="hidden md:block" /> 압도적인 차이입니다.
+          <p className="text-sm leading-[1.75] text-gray max-w-xs">
+            신뢰 기반 소형 커뮤니티가<br className="hidden md:block" /> 만드는 전환율의 차이입니다.
           </p>
           <div className="hidden md:block w-px h-12 bg-white/5" />
           <div className="text-center">

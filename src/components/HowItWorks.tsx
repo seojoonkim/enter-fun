@@ -14,8 +14,8 @@ const steps = [
       </svg>
     ),
     title: "플러그인 연결",
-    desc: "Twitch, 치지직, 숲 — 쓰는 플랫폼에 플러그인 연결. 30초.",
-    detail: "코딩 불필요. 설정 없음.",
+    desc: "Twitch, 치지직, 숲 — 사용 중인 플랫폼에 플러그인을 연결합니다.",
+    detail: "설치 30초. 코딩 불필요.",
   },
   {
     num: "02",
@@ -25,9 +25,9 @@ const steps = [
         <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
       </svg>
     ),
-    title: "그냥 방송하기",
-    desc: "그냥 방송하세요. AI가 알아서 감지하고, 맞는 캠페인 붙여줍니다.",
-    detail: "개입 없음. 자동화 100%.",
+    title: "기존 방식대로 방송",
+    desc: "평소처럼 방송합니다. AI가 최적의 순간을 감지해 캠페인을 자동 매칭합니다.",
+    detail: "개입 불필요. 완전 자동화.",
   },
   {
     num: "03",
@@ -37,9 +37,9 @@ const steps = [
         <path d="M2 10h20"/>
       </svg>
     ),
-    title: "USDC 자동 입금",
-    desc: "전환 발생 → USDC 자동 입금. 월정산 같은 거 없어요.",
-    detail: "블록체인. 지연 없음.",
+    title: "즉시 정산",
+    desc: "전환이 발생하면 USDC로 즉시 정산됩니다. 월정산 대기 없이 실시간으로.",
+    detail: "블록체인 기록. 지연 없음.",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function HowItWorks() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" className="relative overflow-hidden bg-dark2 py-16 md:py-24">
+    <section id="how-it-works" className="relative overflow-hidden bg-dark2 py-12 md:py-16">
       {/* Flow image — decorative background */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-64 opacity-[0.07]"
@@ -63,16 +63,17 @@ export default function HowItWorks() {
         <div className="text-center max-w-xl mx-auto">
           <span className="section-badge">사용법</span>
           <h2 className="mt-4 section-title text-white">
-            3단계면 끝.
+            3단계.
             <br />
-            <span className="gradient-text">나머진 알아서 합니다.</span>
+            <span className="gradient-text">나머지는 자동입니다.</span>
           </h2>
-          <p className="mt-4 text-base text-gray">
-            복잡한 설정 없음. 그냥 방송하면, Enter.fun이 알아서 돈을 만들어 줍니다.
+          <p className="mt-4 text-base leading-[1.75] text-gray">
+            별도 설정 없이 기존 방식 그대로 방송하세요.
+            Enter.fun이 수익화를 대신 처리합니다.
           </p>
         </div>
 
-        <div className="mt-14 relative">
+        <div className="mt-10 relative">
           {/* Connecting line (desktop) */}
           <div className="hidden md:block absolute top-[3.5rem] left-[calc(16.67%+2rem)] right-[calc(16.67%+2rem)] h-px">
             <motion.div

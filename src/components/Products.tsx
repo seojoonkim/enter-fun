@@ -161,17 +161,17 @@ export default function Products() {
   const current = products.find((p) => p.key === active)!;
 
   return (
-    <section id="products" className="relative bg-dark py-16 md:py-24">
+    <section id="products" className="relative bg-dark py-14 md:py-20">
       <div className="container px-4" ref={ref}>
         <div className="max-w-xl">
           <span className="section-badge">핵심 제품</span>
           <h2 className="mt-4 section-title text-white">
-            스트리머, 게임사, 게이머.
+            세 주체 모두가
             <br />
-            <span className="gradient-text">셋 다 이깁니다.</span>
+            <span className="gradient-text">이기는 구조입니다.</span>
           </h2>
-          <p className="mt-4 text-base text-gray">
-            세 주체 모두에게 작동하는 구조를 설계했습니다.
+          <p className="mt-4 text-base leading-[1.75] text-gray">
+            스트리머, 게임사, 게이머 각각의 니즈를 반영한 구조를 설계했습니다.
           </p>
         </div>
 

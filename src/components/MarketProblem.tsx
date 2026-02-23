@@ -50,7 +50,7 @@ export default function MarketProblem() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="market-problem" className="relative overflow-hidden bg-dark2 py-16 md:py-24">
+    <section id="market-problem" className="relative overflow-hidden bg-dark2 py-14 md:py-20">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
@@ -75,16 +75,16 @@ export default function MarketProblem() {
         <div className="max-w-xl">
           <span className="section-badge">왜 필요한가</span>
           <h2 className="mt-4 section-title text-white">
-            스트리머가 팔아줬는데,
+            기여한 만큼
             <br />
-            정작 받는 건 0원.
+            보상받아야 합니다.
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-gray">
-            시장은 $18B로 커졌는데, 보상 모델은 10년째 그대로입니다.
+          <p className="mt-4 text-base leading-[1.75] text-gray">
+            시장은 $18B 규모로 성장했지만, 스트리머에 대한 보상 구조는 10년째 바뀌지 않았습니다.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
           {steps.map((step, i) => (
             <motion.div
               key={step.num}

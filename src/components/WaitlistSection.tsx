@@ -59,7 +59,7 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="relative overflow-hidden py-16 md:py-24"
+      className="relative overflow-hidden py-14 md:py-20"
       ref={sectionRef}
       style={{ background: "linear-gradient(180deg, #0d0d1a 0%, #08081a 100%)" }}
     >
@@ -83,14 +83,14 @@ export default function WaitlistSection() {
           <div className="text-center mb-8">
             <span className="section-badge">스트리머 얼리 액세스</span>
             <h2 className="mt-4 section-title text-white">
-              먼저 시작하는 사람이
+              가장 먼저 시작하는
               <br />
-              <span className="gradient-text">먼저 법니다.</span>
+              <span className="gradient-text">스트리머를 찾습니다.</span>
             </h2>
-            <p className="mt-4 text-base text-gray">
-              얼리 액세스 스트리머:{" "}
-              <span className="font-semibold text-white">첫 3개월 수수료 0%</span>
-              , 캠페인 우선 매칭.
+            <p className="mt-4 text-base leading-[1.75] text-gray">
+              얼리 액세스 스트리머는{" "}
+              <span className="font-semibold text-white">첫 3개월 수수료 없이</span>{" "}
+              시작하며, 캠페인 우선 매칭 혜택을 받습니다.
             </p>
           </div>
 
@@ -185,7 +185,7 @@ export default function WaitlistSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                {status === "success" && "🎉 신청 완료! 런칭 전 가장 먼저 연락드릴게요."}
+                {status === "success" && "신청이 완료되었습니다. 런칭 시 가장 먼저 연락드리겠습니다."}
                 {status === "duplicate" && "이미 등록된 이메일입니다."}
                 {status === "error" && "오류가 발생했습니다. 다시 시도해주세요."}
               </motion.p>

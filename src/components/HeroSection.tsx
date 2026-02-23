@@ -32,7 +32,6 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // 8 particles only — enough texture, not visual noise
     const next = Array.from({ length: 8 }, () => ({
       left: Math.random() * 100,
       bottom: Math.random() * 100,
@@ -67,15 +66,15 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Streamer bg image — right side bleed */}
+      {/* Streamer bg image — right side */}
       <div
         className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 md:block"
         style={{
           backgroundImage: "url('/images/hero-streamer.png')",
           backgroundSize: "cover",
           backgroundPosition: "center left",
-          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.55) 100%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.55) 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 30%, rgba(0,0,0,0.5) 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 30%, rgba(0,0,0,0.5) 100%)",
         }}
       />
 
@@ -91,12 +90,12 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="container relative z-10 flex min-h-screen items-center px-4 py-28 md:px-0">
+      <div className="container relative z-10 flex min-h-screen items-center px-4 py-20 md:px-0">
         <div className="grid w-full gap-12 md:grid-cols-2 md:items-center md:gap-16">
 
           {/* Left — Copy */}
           <motion.div
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-5"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -104,58 +103,55 @@ export default function HeroSection() {
             <motion.div variants={childVariants}>
               <span className="section-badge">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-mint" />
-                스트리머 수익화 플랫폼
+                게임 스트리머 수익 플랫폼
               </span>
             </motion.div>
 
-            <motion.h1
-              className="display-title text-white"
-              variants={childVariants}
-            >
+            <motion.h1 className="display-title text-white" variants={childVariants}>
               스트리머가
               <br />
               <span className="gradient-text">게임을 팔면,</span>
               <br />
-              돈이 된다.
+              수익이 된다.
             </motion.h1>
 
             <motion.p
-              className="max-w-md text-base leading-relaxed text-gray md:text-lg"
+              className="max-w-md text-base leading-[1.75] text-gray md:text-lg"
               variants={childVariants}
             >
-              게이머 <span className="font-semibold text-white">67%</span>는 스트리머 보고 게임을 삽니다.
+              게이머{" "}
+              <span className="font-semibold text-white">67%</span>가
+              스트리머를 통해 게임을 구매합니다.
               <br />
-              근데 스트리머 절반은 수익이 0원이에요.
+              그러나 스트리머{" "}
+              <span className="font-semibold text-white">53%</span>의
+              수익은 0원입니다.
               <br />
-              <span className="mt-1 block text-mint font-medium">그 구조, 바꿀 때 됐죠.</span>
+              <span className="mt-1.5 block font-medium text-mint">
+                Enter.fun이 이 불균형을 해결합니다.
+              </span>
             </motion.p>
 
             <motion.div className="flex flex-wrap gap-3" variants={childVariants}>
-              <a
-                href="#waitlist"
-                className="btn-primary"
-              >
+              <a href="#waitlist" className="btn-primary">
                 얼리 액세스 신청
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </a>
-              <a
-                href="#how-it-works"
-                className="btn-secondary"
-              >
-                어떻게 작동하나요?
+              <a href="#how-it-works" className="btn-secondary">
+                작동 원리
               </a>
             </motion.div>
 
             <motion.div
-              className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/35"
+              className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/30"
               variants={childVariants}
             >
               {[
-                "Kellogg School 2024 논문 인용",
+                "Kellogg School 2024 연구 기반",
                 "블록체인 정산 (USDC)",
-                "수수료 15%만",
+                "수수료 15%",
               ].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -167,16 +163,15 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right — Revenue comparison visual */}
+          {/* Right — Revenue comparison */}
           <motion.div
             className="relative hidden md:block"
             initial={{ opacity: 0, y: 28, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           >
-            {/* Ambient glow */}
-            <div className="absolute inset-x-8 top-8 h-full rounded-3xl opacity-60"
-              style={{ background: "radial-gradient(ellipse at center, rgba(0,212,170,0.08) 0%, rgba(123,97,255,0.04) 60%, transparent 100%)", filter: "blur(24px)" }} />
+            <div className="absolute inset-x-8 top-8 h-full rounded-3xl opacity-50"
+              style={{ background: "radial-gradient(ellipse at center, rgba(0,212,170,0.07) 0%, rgba(123,97,255,0.03) 60%, transparent 100%)", filter: "blur(20px)" }} />
 
             <div className="relative card-glass shadow-2xl overflow-hidden border border-white/10">
               {/* Top bar */}
@@ -186,37 +181,35 @@ export default function HeroSection() {
                   <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
                   <span className="h-2.5 w-2.5 rounded-full bg-mint/40" />
                 </div>
-                <span className="text-[11px] font-semibold text-white/30 tracking-wider uppercase">Enter.fun Dashboard</span>
+                <span className="text-[11px] font-semibold text-white/25 tracking-wider uppercase">Enter.fun Dashboard</span>
                 <div className="w-14" />
               </div>
 
               {/* Before / After */}
               <div className="grid grid-cols-2 divide-x divide-white/5">
-                {/* Before */}
                 <div className="p-7 text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/25 mb-4">지금까지</p>
-                  <p className="text-5xl font-black text-white/20 tracking-[-0.04em]">$0</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-white/20 mb-4">기존 구조</p>
+                  <p className="text-5xl font-black text-white/15 tracking-[-0.04em]">$0</p>
                   <p className="mt-2 text-xs text-white/20">스트리머 수익</p>
                   <div className="mt-5 space-y-2">
                     {["스폰서 수익", "전환 보상", "캠페인 수당"].map((label) => (
                       <div key={label} className="flex items-center gap-2 justify-center">
-                        <div className="h-1 flex-1 max-w-[80px] rounded-full bg-white/5" />
-                        <span className="text-[10px] text-white/20">{label}</span>
-                        <div className="h-1 flex-1 max-w-[80px] rounded-full bg-white/5" />
+                        <div className="h-1 flex-1 max-w-[60px] rounded-full bg-white/5" />
+                        <span className="text-[10px] text-white/15">{label}</span>
+                        <div className="h-1 flex-1 max-w-[60px] rounded-full bg-white/5" />
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* After */}
                 <div className="p-7 text-center bg-mint/[0.02]">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-mint/60 mb-4">Enter.fun과 함께</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-mint/50 mb-4">Enter.fun</p>
                   {mounted && (
                     <p className="text-5xl font-black text-mint tracking-[-0.04em]">
                       $<CountUp end={560} />
                     </p>
                   )}
-                  <p className="mt-2 text-xs text-mint/50">월 예상 추가 수익</p>
+                  <p className="mt-2 text-xs text-mint/40">월 평균 추가 수익</p>
                   <div className="mt-5 space-y-2">
                     {[
                       { label: "스트리밍 캠페인", pct: 57 },
@@ -224,13 +217,13 @@ export default function HeroSection() {
                       { label: "이벤트 보너스", pct: 14 },
                     ].map((bar) => (
                       <div key={bar.label} className="flex items-center gap-2">
-                        <span className="text-[10px] text-white/30 w-20 text-right shrink-0">{bar.label}</span>
+                        <span className="text-[10px] text-white/25 w-20 text-right shrink-0">{bar.label}</span>
                         <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
                           <motion.div
                             className="h-full rounded-full bg-gradient-to-r from-mint to-purple"
                             initial={{ width: 0 }}
                             animate={{ width: `${bar.pct}%` }}
-                            transition={{ duration: 1, delay: 0.8 + bar.pct * 0.005 }}
+                            transition={{ duration: 1, delay: 0.9 + bar.pct * 0.005 }}
                           />
                         </div>
                       </div>
@@ -239,29 +232,14 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Bottom */}
               <div className="border-t border-white/5 bg-white/[0.02] px-5 py-3 flex items-center justify-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-mint animate-pulse" />
-                <span className="text-[11px] text-white/30">USDC 자동 정산 · 블록체인 기록</span>
+                <span className="text-[11px] text-white/25">USDC 자동 정산 · 블록체인 기록</span>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll hint */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-      >
-        <motion.div
-          className="h-8 w-px bg-gradient-to-b from-white/15 to-transparent"
-          animate={{ scaleY: [1, 0.5, 1] }}
-          transition={{ duration: 1.8, repeat: Infinity }}
-        />
-      </motion.div>
     </section>
   );
 }
