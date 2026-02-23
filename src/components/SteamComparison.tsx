@@ -68,9 +68,9 @@ export default function SteamComparison() {
       <div className="container px-4 relative z-10">
         {/* Header */}
         <div className="max-w-xl">
-          <span className="section-badge">MCN vs Enter.fun</span>
+          <span className="section-badge">광고 에이전시 vs Enter.fun</span>
           <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-            기존 MCN은 절반을 가져갑니다.
+            광고 에이전시는 절반을 가져갑니다.
             <br />
             <span className="gradient-text">우리는 15%만 받습니다.</span>
           </h2>
@@ -103,7 +103,7 @@ export default function SteamComparison() {
               <div className="space-y-2.5">
                 {/* MCN bar */}
                 <div className="flex items-center gap-3">
-                  <span className="w-20 shrink-0 text-right text-xs text-white/30">기존 MCN</span>
+                  <span className="w-20 shrink-0 text-right text-xs text-white/30">에이전시</span>
                   <div className="flex-1 h-7 rounded-full bg-white/5 overflow-hidden">
                     {row.mcnWidth > 0 && (
                       <motion.div
