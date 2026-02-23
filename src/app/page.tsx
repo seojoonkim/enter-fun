@@ -6,7 +6,6 @@ import Products from "@/components/Products";
 import SteamComparison from "@/components/SteamComparison";
 import HowItWorks from "@/components/HowItWorks";
 import SocialProof from "@/components/SocialProof";
-import ExpansionVision from "@/components/ExpansionVision";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
 
@@ -20,7 +19,6 @@ export default function Home() {
       <HowItWorks />
       <Products />
       <SteamComparison />
-      <ExpansionVision />
       <SocialProof />
       <WaitlistSection />
       <Footer />

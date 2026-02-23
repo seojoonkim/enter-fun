@@ -7,7 +7,6 @@ const navLinks = [
   { label: "어떻게 작동하나요", href: "#how-it-works" },
   { label: "제품", href: "#products" },
   { label: "비교", href: "#comparison" },
-  { label: "비전", href: "#vision" },
 ];
 
 export default function Navbar() {
