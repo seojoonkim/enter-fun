@@ -121,16 +121,16 @@ export default function HeroSection() {
             >
               게이머{" "}
               <span className="font-semibold text-white">67%</span>가
-              스트리머를 통해 게임을 구매합니다.
+              스트리머 보고 게임을 사요.
               <br />
-              게임사는 스트리머를 필요로 합니다.
+              게임사는 스트리머가 필요해요.
               <br />
-              그러나 스트리머{" "}
+              그런데 스트리머{" "}
               <span className="font-semibold text-white">53%</span>의
-              수익은 아직도 0원입니다.
+              수익은 아직 0원이에요.
               <br />
               <span className="mt-1.5 block font-medium text-mint">
-                Enter.fun이 게임사 예산을 스트리머에게 직접 연결합니다.
+                Enter.fun이 게임사 예산을 스트리머에게 직접 연결해요.
               </span>
             </motion.p>
 

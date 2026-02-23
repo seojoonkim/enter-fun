@@ -71,7 +71,7 @@ export default function Multiplier25x() {
             <span className="gradient-text">결과는 25배 차이.</span>
           </h2>
           <p className="mt-4 text-base leading-[1.75] text-gray">
-            신뢰 기반 소형 커뮤니티 100개가 만들어내는 효율의 차이입니다.
+소형 커뮤니티 100개가 만들어내는 전환율이에요.
           </p>
         </div>
 
@@ -158,7 +158,7 @@ export default function Multiplier25x() {
           </div>
           <div className="hidden md:block w-px h-12 bg-white/5" />
           <p className="text-sm leading-[1.75] text-gray max-w-xs">
-            신뢰 기반 소형 커뮤니티가<br className="hidden md:block" /> 만드는 전환율의 차이입니다.
+소형 커뮤니티 100개가<br className="hidden md:block" /> 만드는 전환율이에요.
           </p>
           <div className="hidden md:block w-px h-12 bg-white/5" />
           <div className="text-center">

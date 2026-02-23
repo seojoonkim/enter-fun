@@ -23,7 +23,7 @@ const steps: Step[] = [
     prefix: "$",
     suffix: "B",
     label: "게임 스트리밍 시장 규모",
-    desc: "180억 달러. 그리고 게이머 67%가 스트리머 보고 게임을 삽니다.",
+    desc: "180억 달러 시장. 게이머 67%는 스트리머 보고 게임을 사요.",
     accent: "#00d4aa",
   },
   {
@@ -32,7 +32,7 @@ const steps: Step[] = [
     number: 53,
     suffix: "%",
     label: "수익이 0원인 스트리머",
-    desc: "절반이 넘는 스트리머가 마케팅에 기여하고도 아무것도 받지 못합니다.",
+    desc: "절반 넘는 스트리머가 마케팅하고도 수익은 0원이에요.",
     accent: "#7b61ff",
   },
   {
@@ -40,7 +40,7 @@ const steps: Step[] = [
     valueType: "text",
     number: "−ROI",
     label: "스폰서 스트리밍의 현실",
-    desc: "Northwestern Kellogg 2024. 기존 스폰서 모델은 게임사도, 스트리머도 모두 실패시킵니다.",
+    desc: "Northwestern Kellogg 2024. 기존 스폰서 모델은 게임사도, 스트리머도 손해예요.",
     accent: "#ff6b6b",
   },
 ];
@@ -77,10 +77,10 @@ export default function MarketProblem() {
           <h2 className="mt-4 section-title text-white">
             기여한 만큼
             <br />
-            보상받아야 합니다.
+            보상받는 구조.
           </h2>
           <p className="mt-4 text-base leading-[1.75] text-gray">
-            시장은 $18B 규모로 성장했지만, 스트리머에 대한 보상 구조는 10년째 바뀌지 않았습니다.
+$18B 규모 시장. 스트리머 보상은 10년째 그대로예요.
           </p>
         </div>
 

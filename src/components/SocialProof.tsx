@@ -48,7 +48,7 @@ export default function SocialProof() {
             연구가 뒷받침합니다.
           </h2>
           <p className="mt-4 text-base leading-[1.75] text-gray">
-            Enter.fun의 모델은 학술 연구와 시장 데이터를 기반으로 설계되었습니다.
+학술 연구와 시장 데이터가 뒷받침하는 모델이에요.
           </p>
         </div>
 

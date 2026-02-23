@@ -26,8 +26,8 @@ const steps = [
       </svg>
     ),
     title: "기존 방식대로 방송",
-    desc: "평소처럼 방송합니다. AI가 최적의 순간을 감지해 캠페인을 자동 매칭합니다.",
-    detail: "개입 불필요. 완전 자동화.",
+    desc: "평소처럼 방송하세요. 맞는 캠페인이 자동으로 붙어요.",
+    detail: "직접 할 일 없어요. 전부 자동.",
   },
   {
     num: "03",
@@ -68,8 +68,7 @@ export default function HowItWorks() {
             <span className="gradient-text">나머지는 자동입니다.</span>
           </h2>
           <p className="mt-4 text-base leading-[1.75] text-gray">
-            별도 설정 없이 기존 방식 그대로 방송하세요.
-            Enter.fun이 수익화를 대신 처리합니다.
+기존 방식 그대로 방송하세요. 수익은 자동으로 잡혀요.
           </p>
         </div>
 

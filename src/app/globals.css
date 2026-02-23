@@ -83,7 +83,7 @@ body { background: var(--bg-base); color: var(--text-primary); font-family: var(
 }
 .section-title {
   font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.08;
+  line-height: 1.18;
   letter-spacing: -0.03em;
   font-weight: 900;
 }
