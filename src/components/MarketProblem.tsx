@@ -4,73 +4,110 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import CountUp from "@/components/CountUp";
 
-const stats = [
-  { end: 180, suffix: "억달러", label: "게임 스트리밍 시장 (2024)" },
-  { end: 67, suffix: "%", label: "스트리머 보고 게임 구매하는 게이머" },
-  { end: 53, suffix: "%", label: "수익 0원인 스트리머" },
+type Step = {
+  badge: string;
+  valueType: "count" | "text";
+  number: number | string;
+  prefix?: string;
+  suffix?: string;
+  title: string;
+  description: string;
+};
+
+const steps: Step[] = [
+  {
+    badge: "STEP 1 — 발견",
+    valueType: "count",
+    number: 18,
+    suffix: "B",
+    prefix: "$",
+    title: "게임 스트리밍 시장은 180억 달러.",
+    description:
+      "게이머 67%가 스트리머를 보고 게임을 구매합니다.",
+  },
+  {
+    badge: "STEP 2 — 모순",
+    valueType: "count",
+    number: 53,
+    suffix: "%",
+    title: "그런데 스트리머 53%는 수익이 0원입니다.",
+    description: "그들의 영향력은 마케팅 비용의 외부자원처럼 취급됩니다.",
+  },
+  {
+    badge: "STEP 3 — 실패",
+    valueType: "text",
+    number: "-ROI",
+    title: "스폰서 스트리밍의 ROI는 매우 부정적",
+    description:
+      "Northwestern University, 2024 기준. 현재 시스템은 모두에게 실패하고 있습니다.",
+  },
 ];
 
-const problems = [
-  {
-    icon: "🎮",
-    title: "스트리머 보상 없음",
-    description: "게이머 67%가 스트리머 보고 게임을 사지만 스트리머 53%는 수익 0원",
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+    },
   },
-  {
-    icon: "📉",
-    title: "스폰서 ROI 최악",
-    description: "게임사 스폰서 스트리밍 ROI 매우 부정적 — Northwestern University 2024",
-  },
-  {
-    icon: "💸",
-    title: "비효율적 마케팅",
-    description: "대형 1명 0,000 vs 소형 100명 0,000 — 같은 비용 25배 전환율 차이",
-  },
-];
+};
+
+const stepVariants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
 
 export default function MarketProblem() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="problem" className="bg-dark py-24" ref={ref}>
+    <section id="market-problem" className="bg-dark py-24" ref={ref}>
       <div className="container px-4">
-        <div className="mb-8">
-          <h2 className="section-title text-3xl font-bold text-white">
-            180억달러 시장의 해결되지 않은 문제
-          </h2>
-        </div>
-        <div className="mb-12 grid gap-4 md:grid-cols-3">
-          {stats.map((item, index) => (
+        <p className="section-badge">💀 $18B 시장의 치명적 모순</p>
+        <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">
+          스트리머가 팔아주는데, 보상은 0원?
+        </h2>
+        <p className="mt-3 max-w-2xl text-gray">
+          시장은 성장했지만, 보상 구조는 그대로입니다.
+        </p>
+        <motion.div
+          className="mt-12 relative pl-8 border-l-2 border-mint/20"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {steps.map((step, index) => (
             <motion.div
-              key={item.label}
-              className="glass-card rounded-2xl border border-white/5 p-6 text-center"
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
+              key={step.badge}
+              className="relative mb-16 last:mb-0"
+              variants={stepVariants}
             >
-              <p className="text-3xl font-black text-mint">
-                <CountUp end={item.end} suffix={item.suffix} />
-              </p>
-              <p className="mt-2 text-sm text-gray">{item.label}</p>
+              <div className="absolute -left-[calc(2rem+5px)] top-3 w-4 h-4 rounded-full bg-mint shadow-[0_0_14px_rgba(0,212,170,0.5)] border border-dark" />
+              <div className="absolute -left-8 top-0 h-full w-full -z-10 bg-mint/5 blur-2xl rounded-2xl" />
+              <span className="section-badge">{step.badge}</span>
+              {step.valueType === "count" ? (
+                <p className="mt-2 text-6xl font-black text-mint">
+                  <CountUp
+                    end={typeof step.number === "number" ? step.number : 0}
+                    prefix={step.prefix}
+                    suffix={step.suffix}
+                  />
+                </p>
+              ) : (
+                <p className="mt-2 text-6xl font-black text-mint">{step.number}</p>
+              )}
+              <p className="mt-2 text-lg font-semibold text-white">{step.title}</p>
+              <p className="mt-2 max-w-lg text-gray">{step.description}</p>
+              {index === 0 ? (
+                <p className="mt-2 text-sm text-gray">
+                  <span className="text-white">67%</span>의 게이머가 스트리머의 추천으로 게임을
+                  구매합니다.
+                </p>
+              ) : null}
             </motion.div>
           ))}
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {problems.map((problem, index) => (
-            <motion.div
-              key={problem.title}
-              className="glass-card rounded-2xl border border-white/5 p-6"
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-            >
-              <p className="text-4xl">{problem.icon}</p>
-              <h3 className="mt-4 text-xl font-bold text-white">{problem.title}</h3>
-              <p className="mt-2 text-sm text-gray">{problem.description}</p>
-            </motion.div>
-          ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

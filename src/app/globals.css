@@ -94,3 +94,33 @@ body {
   background: rgba(22, 33, 62, 0.76);
   backdrop-filter: blur(8px);
 }
+
+.gradient-text {
+  background: linear-gradient(135deg, #00d4aa 0%, #7b61ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-mint {
+  box-shadow: 0 0 60px rgba(0, 212, 170, 0.15);
+}
+
+.glow-purple {
+  box-shadow: 0 0 60px rgba(123, 97, 255, 0.15);
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 212, 170, 0.3);
+  background: rgba(0, 212, 170, 0.08);
+  color: #00d4aa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}

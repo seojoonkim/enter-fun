@@ -3,63 +3,113 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const rows = [
-  { name: "총 시청자", large: "50,000명", small: "50,000명" },
-  { name: "평균 시청시간", large: "8분", small: "25분" },
-  { name: "채팅 참여율", large: "2%", small: "35%" },
-  { name: "게임 언급 반응률", large: "0.5%", small: "12%" },
-  { name: "예상 전환율", large: "0.1%", small: "2.5%" },
-  { name: "예상 구매자", large: "50명", small: "1,250명" },
-];
+type StatProps = {
+  label: string;
+  value: string;
+  color: string;
+};
+
+const bigStreamers = {
+  label: "대형 스트리머 1명",
+  budget: "$10,000",
+  icon: "🧊",
+  stats: [
+    { label: "시청자", value: "50,000명" },
+    { label: "참여율", value: "2%" },
+    { label: "전환", value: "50명" },
+  ],
+};
+
+const smallStreamers = {
+  label: "소형 스트리머 100명",
+  budget: "$100 × 100",
+  icon: "🔥",
+  stats: [
+    { label: "시청자", value: "50,000명" },
+    { label: "참여율", value: "35%" },
+    { label: "전환", value: "1,250명" },
+  ],
+};
+
+function Stat({ label, value, color }: StatProps) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-sm text-gray">{label}</span>
+      <span className={`font-semibold ${color}`}>{value}</span>
+    </div>
+  );
+}
 
 export default function Multiplier25x() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-dark2 py-24" ref={ref}>
+    <section id="multiplier" className="bg-dark2 py-24" ref={ref}>
       <div className="container px-4">
-        <p className="section-title text-3xl font-bold text-white">
-          소형 스트리머 100명 = 25배 전환율
+        <p className="section-badge">⚡ 같은 비용, 25배의 결과</p>
+        <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">
+          $10,000의 두 가지 사용법
+        </h2>
+        <p className="mt-3 max-w-2xl text-gray">
+          같은 비용으로도, 커뮤니티의 밀도가 결과를 완전히 바꿉니다.
         </p>
-        <p className="mt-3 text-gray">
-          동일 비용 0,000 투자 시 성과 비교
-        </p>
-        <div className="mt-8 max-w-3xl overflow-x-auto mx-auto">
-          <table className="min-w-[720px] w-full border-collapse">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="px-4 py-3 text-left text-sm font-medium text-gray">지표</th>
-                <th className="px-4 py-3 text-right text-sm font-medium text-gray">
-                  대형 1명 (0,000)
-                </th>
-                <th className="px-4 py-3 text-right text-sm font-bold text-mint">
-                  소형 100명 (00x100)
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, index) => (
-                <motion.tr
-                  key={row.name}
-                  className={`border-b border-white/10 ${index === rows.length - 1 ? "font-bold" : ""}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                >
-                  <td className="px-4 py-3 text-sm text-gray">{row.name}</td>
-                  <td className="px-4 py-3 text-right text-sm text-white">{row.large}</td>
-                  <td className="px-4 py-3 text-right text-sm text-mint">{row.small}</td>
-                </motion.tr>
+        <div className="mt-10 grid gap-6 md:grid-cols-[1fr_auto_1fr] items-center max-w-4xl mx-auto">
+          <motion.div
+            className="glass-card rounded-2xl border border-white/5 p-8"
+            initial={{ opacity: 0, x: -60 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-5xl mb-4">{bigStreamers.icon}</p>
+            <h3 className="text-xl font-bold text-white/70">{bigStreamers.label}</h3>
+            <p className="text-sm text-white/40">{bigStreamers.budget}</p>
+            <div className="mt-6 space-y-3">
+              {bigStreamers.stats.map((item) => (
+                <Stat
+                  key={item.label}
+                  label={item.label}
+                  value={item.value}
+                  color="text-white/50"
+                />
               ))}
-            </tbody>
-          </table>
+            </div>
+          </motion.div>
+          <motion.p
+            className="text-4xl font-black text-white/30 text-center"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+          >
+            VS
+          </motion.p>
+          <motion.div
+            className="glass-card rounded-2xl border border-mint/30 p-8 glow-mint bg-mint/5"
+            initial={{ opacity: 0, x: 60 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-5xl mb-4">{smallStreamers.icon}</p>
+            <h3 className="text-xl font-bold text-mint">{smallStreamers.label}</h3>
+            <p className="text-sm text-mint/60">{smallStreamers.budget}</p>
+            <div className="mt-6 space-y-3">
+              {smallStreamers.stats.map((item) => (
+                <Stat key={item.label} label={item.label} value={item.value} color="text-mint" />
+              ))}
+            </div>
+          </motion.div>
         </div>
-        <div className="mt-10 text-center">
-          <p className="text-5xl font-extrabold text-mint">
-            25x <span className="font-semibold text-gray">더 높은 전환율</span>
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.3 }}
+        >
+          <p className="text-6xl font-black text-mint">25x</p>
+          <p className="mt-2 text-lg text-gray">
+            소형 스트리머의 친밀한 커뮤니티가 만드는 압도적 차이
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

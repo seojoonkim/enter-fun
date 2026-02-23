@@ -4,7 +4,8 @@ import MarketProblem from "@/components/MarketProblem";
 import Multiplier25x from "@/components/Multiplier25x";
 import Products from "@/components/Products";
 import SteamComparison from "@/components/SteamComparison";
-import TechStack from "@/components/TechStack";
+import HowItWorks from "@/components/HowItWorks";
+import SocialProof from "@/components/SocialProof";
 import ExpansionVision from "@/components/ExpansionVision";
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
@@ -16,10 +17,11 @@ export default function Home() {
       <HeroSection />
       <MarketProblem />
       <Multiplier25x />
+      <HowItWorks />
       <Products />
       <SteamComparison />
-      <TechStack />
       <ExpansionVision />
+      <SocialProof />
       <WaitlistSection />
       <Footer />
     </main>
