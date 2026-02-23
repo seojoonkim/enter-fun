@@ -1,20 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { type FormEvent } from "react";
+import { AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { isSupabaseReady, supabase } from "@/lib/supabase";
 
-type Role = "streamer" | "game" | "investor";
-
-const roles: Array<{ value: Role; label: string; desc: string }> = [
-  { value: "streamer", label: "🎙️ 스트리머", desc: "평균 월 $500+ 추가 수익 기회" },
-  { value: "game", label: "🎮 게임사", desc: "ROI 25x, 성과 기반 과금" },
-  { value: "investor", label: "💰 투자자", desc: "$18B 시장, 퍼스트 무버" },
-];
-
 export default function WaitlistSection() {
-  const [role, setRole] = useState<Role>("streamer");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "duplicate" | "error">("idle");
   const [loading, setLoading] = useState(false);
@@ -25,8 +17,13 @@ export default function WaitlistSection() {
     const key = "waitlist-fallback";
     const raw = localStorage.getItem(key);
     const parsed = raw ? JSON.parse(raw) : [];
-    const nextList = Array.isArray(parsed) ? parsed.filter((item: string) => typeof item === "string") : [];
-    if (nextList.includes(nextEmail)) { setStatus("duplicate"); return false; }
+    const nextList = Array.isArray(parsed)
+      ? parsed.filter((item: string) => typeof item === "string")
+      : [];
+    if (nextList.includes(nextEmail)) {
+      setStatus("duplicate");
+      return false;
+    }
     nextList.push(nextEmail);
     localStorage.setItem(key, JSON.stringify(nextList));
     setStatus("success");
@@ -41,7 +38,7 @@ export default function WaitlistSection() {
     setStatus("idle");
     try {
       if (isSupabaseReady) {
-        const { error } = await supabase!.from("waitlist").insert({ email: nextEmail, role });
+        const { error } = await supabase!.from("waitlist").insert({ email: nextEmail, role: "streamer" });
         if (error) {
           if (error.code === "23505") setStatus("duplicate");
           else setStatus("error");
@@ -59,8 +56,6 @@ export default function WaitlistSection() {
     }
   };
 
-  const currentRole = roles.find((r) => r.value === role)!;
-
   return (
     <section
       id="waitlist"
@@ -70,8 +65,13 @@ export default function WaitlistSection() {
     >
       {/* Background glow */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
-          style={{ background: "radial-gradient(circle, rgba(123,97,255,0.15) 0%, rgba(0,212,170,0.05) 50%, transparent 70%)" }} />
+        <div
+          className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,212,170,0.12) 0%, rgba(123,97,255,0.06) 50%, transparent 70%)",
+          }}
+        />
       </div>
 
       <div className="container px-4 relative z-10">
@@ -83,60 +83,47 @@ export default function WaitlistSection() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <span className="section-badge">얼리 액세스</span>
+            <span className="section-badge">스트리머 얼리 액세스</span>
             <h2 className="mt-4 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.08] tracking-[-0.03em] text-white">
-              런칭의 첫 번째가
+              지금 신청하면,
               <br />
-              되어주세요.
+              <span className="gradient-text">가장 먼저 시작합니다.</span>
             </h2>
             <p className="mt-4 text-base text-gray">
-              얼리 액세스 멤버에게는{" "}
-              <span className="font-semibold text-white">첫 3개월 수수료 0%</span> 혜택이 제공됩니다.
+              얼리 액세스 스트리머에게는{" "}
+              <span className="font-semibold text-white">첫 3개월 수수료 0%</span>와{" "}
+              <span className="font-semibold text-white">우선 캠페인 매칭</span> 혜택이 제공됩니다.
             </p>
-            <p className="mt-2 flex items-center justify-center gap-1.5 text-sm text-red-400 font-semibold">
+            <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-red-400 font-semibold">
               <span className="h-1.5 w-1.5 rounded-full bg-red-400 animate-pulse" />
-              얼리 액세스 1,000자리 한정
+              스트리머 얼리 액세스 1,000자리 한정
             </p>
           </div>
 
-          {/* Role selector */}
-          <div className="flex gap-2 flex-wrap justify-center mb-6">
-            {roles.map((r) => (
-              <button
-                key={r.value}
-                type="button"
-                onClick={() => setRole(r.value)}
-                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-                  role === r.value
-                    ? "border-mint bg-mint/10 text-mint"
-                    : "border-white/10 text-gray hover:border-white/20 hover:text-white"
-                }`}
+          {/* Perks */}
+          <div className="mb-7 grid grid-cols-3 gap-3">
+            {[
+              { icon: "💸", label: "수수료 0%", sub: "첫 3개월" },
+              { icon: "🎯", label: "우선 매칭", sub: "캠페인 우선권" },
+              { icon: "⚡", label: "즉시 정산", sub: "USDC 자동" },
+            ].map((perk) => (
+              <div
+                key={perk.label}
+                className="rounded-xl border border-mint/10 bg-mint/5 px-3 py-3 text-center"
               >
-                {r.label}
-              </button>
+                <p className="text-xl">{perk.icon}</p>
+                <p className="mt-1 text-xs font-bold text-white">{perk.label}</p>
+                <p className="text-[10px] text-gray">{perk.sub}</p>
+              </div>
             ))}
           </div>
-
-          {/* Role value prop */}
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={role}
-              className="mb-5 text-center text-sm font-medium text-mint"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-            >
-              ✓ {currentRole.desc}
-            </motion.p>
-          </AnimatePresence>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일 주소"
+              placeholder="내 이메일 주소"
               type="email"
               required
               className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3.5 text-sm text-white placeholder-white/30 outline-none backdrop-blur-sm transition focus:border-mint focus:ring-1 focus:ring-mint/20"
@@ -146,7 +133,7 @@ export default function WaitlistSection() {
               disabled={loading}
               className="shrink-0 rounded-full bg-mint px-7 py-3.5 text-sm font-bold text-dark shadow-[0_0_20px_rgba(0,212,170,0.25)] transition hover:scale-[1.02] hover:shadow-[0_0_32px_rgba(0,212,170,0.4)] disabled:opacity-60 active:scale-[0.98]"
             >
-              {loading ? "처리 중…" : "신청하기"}
+              {loading ? "처리 중…" : "신청하기 →"}
             </button>
           </form>
 
@@ -155,15 +142,17 @@ export default function WaitlistSection() {
             {status !== "idle" && (
               <motion.p
                 className={`mt-3 text-center text-sm ${
-                  status === "success" ? "text-mint" :
-                  status === "duplicate" ? "text-yellow-400" :
-                  "text-red-400"
+                  status === "success"
+                    ? "text-mint"
+                    : status === "duplicate"
+                    ? "text-yellow-400"
+                    : "text-red-400"
                 }`}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                {status === "success" && "🎉 신청 완료! 곧 연락드릴게요."}
+                {status === "success" && "🎉 신청 완료! 런칭 전 가장 먼저 연락드릴게요."}
                 {status === "duplicate" && "이미 등록된 이메일입니다."}
                 {status === "error" && "오류가 발생했습니다. 다시 시도해주세요."}
               </motion.p>
@@ -171,22 +160,10 @@ export default function WaitlistSection() {
           </AnimatePresence>
 
           {/* Social proof */}
-          <div className="mt-8 flex items-center justify-center gap-4 text-xs text-white/30">
-            <span className="flex items-center gap-1.5">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/5 text-[9px]">🎙️</span>
-              스트리머 320명
-            </span>
-            <span className="h-3 w-px bg-white/10" />
-            <span className="flex items-center gap-1.5">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/5 text-[9px]">🎮</span>
-              게임사 45개
-            </span>
-            <span className="h-3 w-px bg-white/10" />
-            <span className="flex items-center gap-1.5">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/5 text-[9px]">💰</span>
-              투자자 135명
-            </span>
-          </div>
+          <p className="mt-6 text-center text-xs text-white/30">
+            이미{" "}
+            <span className="font-semibold text-white/60">320명의 스트리머</span>가 신청했습니다
+          </p>
         </motion.div>
       </div>
     </section>
